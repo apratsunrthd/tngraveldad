@@ -1,0 +1,45 @@
+name: Generate sitemap.xml
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write   # <-- this is the important bit
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed so lastmod uses real git history
+
+      - name: Generate sitemap
+        id: sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://tngraveldad.com/
+          # path-to-root: docs   # uncomment if your site root is in /docs or similar
+
+      - name: Commit updated sitemap
+        run: |
+          set -e
+
+          sitemap_path="${{ steps.sitemap.outputs.sitemap-path }}"
+          echo "Sitemap generated at: $sitemap_path"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "$sitemap_path"
+
+          if git diff --cached --quiet; then
+            echo "No changes to $sitemap_path"
+            exit 0
+          fi
+
+          git commit -m "Update sitemap [skip ci]"
+          git push
