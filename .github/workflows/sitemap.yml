@@ -24,6 +24,17 @@ jobs:
           base-url-path: https://tngraveldad.com/
           # path-to-root: docs   # uncomment if your site root is in /docs or similar
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Inject Google Analytics
+        env:
+          GA_ID: G-EM06MYPZ27   # <- change per repo
+        run: node inject-ga.js
+
+
       - name: Commit updated sitemap
         run: |
           set -e
