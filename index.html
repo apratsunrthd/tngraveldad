@@ -9,66 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body data-theme="night">
+<body class="night-theme">
   <div class="page">
     <header class="hero">
       <div class="badge">TN Gravel Dad</div>
       <h1>Ride-ready links</h1>
       <p class="lead">Follow the latest gravel adventures, updates, and community stories.</p>
     </header>
-
-    <section class="theme-switcher" aria-label="Style themes">
-      <div class="theme-header">
-        <p class="theme-title">Choose your ride-ready style</p>
-        <p class="theme-subtitle">Each version includes a live preview and quick apply button.</p>
-      </div>
-      <div class="theme-grid">
-        <article class="theme-card" data-theme-value="night">
-          <div class="preview" aria-hidden="true">
-            <span class="preview-label">Preview</span>
-            <div class="preview-body">
-              <p class="preview-title">Night ride</p>
-              <p class="preview-text">Deep navy gradients with neon accents for late gravel loops.</p>
-            </div>
-          </div>
-          <div class="theme-content">
-            <p class="theme-name">Night Gradient</p>
-            <p class="theme-description">Glassmorphism feel with electric oranges and blues.</p>
-            <button class="theme-button" type="button">Use style</button>
-          </div>
-        </article>
-
-        <article class="theme-card" data-theme-value="dawn">
-          <div class="preview" aria-hidden="true">
-            <span class="preview-label">Preview</span>
-            <div class="preview-body">
-              <p class="preview-title">Dawn warmup</p>
-              <p class="preview-text">Sunrise peach and amber with soft, warm highlights.</p>
-            </div>
-          </div>
-          <div class="theme-content">
-            <p class="theme-name">Dawn Glow</p>
-            <p class="theme-description">Smooth gradients inspired by first light on the trail.</p>
-            <button class="theme-button" type="button">Use style</button>
-          </div>
-        </article>
-
-        <article class="theme-card" data-theme-value="forest">
-          <div class="preview" aria-hidden="true">
-            <span class="preview-label">Preview</span>
-            <div class="preview-body">
-              <p class="preview-title">Pine singletrack</p>
-              <p class="preview-text">Emerald greens with mossy shadows and crisp contrast.</p>
-            </div>
-          </div>
-          <div class="theme-content">
-            <p class="theme-name">Forest Canopy</p>
-            <p class="theme-description">Earthy gradients with bright trail markers for CTAs.</p>
-            <button class="theme-button" type="button">Use style</button>
-          </div>
-        </article>
-      </div>
-    </section>
 
     <main class="link-grid" aria-label="Main links">
       <article class="link-card">
@@ -121,28 +68,5 @@
       <p>Built for the trail-ready community.</p>
     </footer>
   </div>
-  <script>
-    const themeCards = document.querySelectorAll('.theme-card');
-    const body = document.body;
-
-    function setTheme(theme) {
-      body.setAttribute('data-theme', theme);
-      themeCards.forEach((card) => {
-        const isActive = card.dataset.themeValue === theme;
-        card.classList.toggle('is-active', isActive);
-        const button = card.querySelector('.theme-button');
-        if (button) {
-          button.setAttribute('aria-pressed', String(isActive));
-        }
-      });
-    }
-
-    themeCards.forEach((card) => {
-      const button = card.querySelector('.theme-button');
-      button?.addEventListener('click', () => setTheme(card.dataset.themeValue));
-    });
-
-    setTheme('night');
-  </script>
 </body>
 </html>
